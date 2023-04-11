@@ -5,16 +5,17 @@ public class Worker {
     public Worker(OnTaskDoneListener callback) {
         this.callback = callback;
     }
+
     public Worker(OnTaskErrorListener errorCallback) {
         this.errorCallback = errorCallback;
     }
-    public void start(int failed) {
-        for(int i=0;i<100;i++){
-            if(i!=failed) {
+
+    public void start() {
+        for (int i = 0; i < 100; i++) {
+            if (i != 33) {
                 callback.onDone("Task " + i + " is done");
-            }
-            else {
-                if(errorCallback==null){
+            } else {
+                if (errorCallback == null) {
                     errorCallback = System.out::println;
                 }
                 errorCallback.onError("Task " + i + " is failed");
@@ -22,13 +23,5 @@ public class Worker {
         }
     }
 
-    @FunctionalInterface
-    public interface OnTaskDoneListener {
-        void onDone(String result);
-    }
-    @FunctionalInterface
-    public interface OnTaskErrorListener {
-        void onError(String result);
-    }
 
 }
