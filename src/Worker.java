@@ -2,11 +2,8 @@ public class Worker {
     private OnTaskDoneListener callback;
     private OnTaskErrorListener errorCallback;
 
-    public Worker(OnTaskDoneListener callback) {
+    public Worker(OnTaskDoneListener callback, OnTaskErrorListener errorCallback) {
         this.callback = callback;
-    }
-
-    public Worker(OnTaskErrorListener errorCallback) {
         this.errorCallback = errorCallback;
     }
 
@@ -15,9 +12,6 @@ public class Worker {
             if (i != 33) {
                 callback.onDone("Task " + i + " is done");
             } else {
-                if (errorCallback == null) {
-                    errorCallback = System.out::println;
-                }
                 errorCallback.onError("Task " + i + " is failed");
             }
         }
